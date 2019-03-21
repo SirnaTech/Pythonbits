@@ -1,0 +1,10 @@
+#*****************************************************************#
+# Determining missing values in a dataframe
+# Version 1
+# Copyrights: SirnaTechSolutions
+# Date: 21 March 2019
+#*****************************************************************#
+
+import pandas as pd
+dataframeMissingInfo = dataframe[dataframe.columns[dataframe.isnull().any()]].isnull().sum() #The name of the dataframe to determine missing values is 'dataframe'
+dataframeMissingInfo.to_csv("dataframeMissingInfo.csv", header = False) 
