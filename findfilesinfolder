@@ -1,0 +1,25 @@
+from IPython.display import display
+import matplotlib.pyplot as plt
+%matplotlib inline
+import numpy as np
+import os
+import shutil
+import wfdb
+import glob, os
+import pandas as pd
+import re
+
+patientData = pd.DataFrame(columns = ["Patient ID","Signals Present", "Number of Segments"] )
+logfile = open(r'missedfileslog.txt','a+')
+#path = "D:\mimic3wdb\matched"; #Laptop
+path = "D:\MIMICIHeaderFiles";
+for folder in os.listdir(path): #Get the main folder list
+    if(os.path.isfile(path+'/'+folder)==0):
+        print("******************"+folder+"******************")
+        for subfolder in os.listdir (path + '/' + folder): #Get the subfolders in the main folders, these will be patient numbers                
+            if(os.path.isfile(path + '/' + folder+'/'+subfolder)==0):
+                print("//"+subfolder+"//")
+                for file in os.listdir(path + '/'+ folder+'/'+ subfolder):
+                    rhea = re.compile(subfolder+'.*[0-9].hea')
+                    if rhea.match(file) is not None:
+                        print(path + '/'+ folder+'/'+ subfolder+'/'+file[:-4])
